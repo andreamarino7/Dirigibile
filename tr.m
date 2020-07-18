@@ -1,5 +1,5 @@
 function [T,rho] = tr(x)
-%% Calcolo Temperatura, Pressione e Densità ad una data quota z
+%% Calcolo Temperatura e Densità ad una data quota z
 global p0 L g R T0
 
 z=x(1);

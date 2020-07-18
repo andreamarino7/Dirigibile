@@ -10,7 +10,7 @@ syms x1 x2 x3 u1 u2; % x1=z; x2=dz; x3=T; u1=dTi; u2=Fdz;
 
 x=[x1;x2;x3];
 u=[u1;u2];
-[Te,rho]=tr(x);
+[Te,rho]=tr(x);             %Presa di pressione esterna, pint=pext
 m=m0+rho*Te*V/x3;
 Sz=l*2*r+pi/2*r^2;
 
@@ -78,13 +78,13 @@ p=[-1;-2;-3];
 K=-place(A,B,p);
 
 %Poli d A+LC ... convergenza
-q=5*p;
-L=-place(A.',C.',q).';
+q=[-20,-21,-22];
+L=-(place(A.',C.',q)).';
 
 %Regolatore
-reg=ss(sys.a+sys.b*K+L*sys.c,L,K,0);
+reg=ss(A+B*K+L*C,L,K,0);
 
-% %% Anello chiuso e risposta al gradino
-% Gc1=feedback(sys,reg);
-% opt=stepDataOptions('StepAmplitude',dcgain(Gc1))
-% step(Gc1,opt)
+%% Anello chiuso e risposta al gradino
+Gc1=feedback(sys,reg);
+opt=stepDataOptions('StepAmplitude',dcgain(reg));
+step(Gc1,opt)

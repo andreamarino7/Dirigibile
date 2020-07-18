@@ -1,23 +1,23 @@
-function plot_dirigibile_xz(x)
+function plot_dirigibile_xy(x1)
 %% Definizione parametri e punti
 global l r
 
-z=x(1);
+x=x1(1); y=x1(2); phi=x1(3);
 lc=l-r;
 xg=Baricentro_Dirigibile;
-pg=[0,z]/10;            %Posizione baricentro
-coda=[-xg,z]/10;     %Posizione coda
-testa=[lc-xg,z]/10;  %Posizione cabina di guida
+pg=[x,y];            %Posizione baricentro
+coda=pg-[xg*cos(phi),xg*sin(phi)];     %Posizione coda
+testa=coda+lc*[cos(phi),sin(phi)];  %Posizione cabina di guida
 
 %% Plot del dirigibile nel piano xz
 f=figure;
 f.WindowState='maximized';
 hold on
 grid on
-title('Piano x - z');
+title('Piano x - y');
 xlabel('x');
-ylabel('z');
-axis ([-20 20 0 1500]);
+ylabel('y');
+axis ([-100 100 -100 100]);
 
 plot(testa(1),testa(2),'yo','linewidth',5);
 plot([coda(1) testa(1)],[coda(2) testa(2)],'-g','linewidth',10);
