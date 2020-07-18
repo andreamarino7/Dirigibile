@@ -1,13 +1,13 @@
 %% Definizione parametri dirigibile Airlander 10
-% https://pdf.aeroexpo.online/it/pdf-en/hybrid-air-vehicles/airlander-10-technical-data/175127-203.html#open
+% http://gefaflug.com/six-seat-airship-gd-6/
 clear all; close all; clc;
 
-global m0 l r V I T0 L p0  g R Cx0 Cy0 Cz
+global m0 l r V  T0 L p0  g R Cx0 Cy0 Cz %I
 
-m0=20000;                   %kg (7650kg a vuoto + 10 passeggeri da 70 kg l'uno) da data sheet
-l=92;                       %m                                                  da data sheet
-r=13;                       %m                                                  da data sheet
-V=38e3;                     %m^3                                                da data sheet
+m0=2000;                    %kg (1488kg a vuoto + 1 pilota + 450 kg di carico) da data sheet
+l=48.6;                     %m                                                  da data sheet
+r=7.44;                     %m                                                  da data sheet
+V=5e3;                      %m^3                                                da data sheet
 % I=Inerzia_Dirigibile;     %kgm^2
 T0=288.15;                  %K                                                  da ISA
 L=6.5e-3;                   %K/m                                                da ISA

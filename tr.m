@@ -1,4 +1,4 @@
-function [T,p,rho] = tpr(x)
+function [T,rho] = tr(x)
 %% Calcolo Temperatura, Pressione e Densità ad una data quota z
 global p0 L g R T0
 
