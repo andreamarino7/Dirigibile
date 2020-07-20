@@ -6,19 +6,19 @@ global m0 l r V g Cz z_bar Kt c
 Kt=1;               %W/K
 c=718;              %J/K
 
-syms x1 x2 x3 u1 u2; % x1=z; x2=dz; x3=T; u1=dTi; u2=Fdz;
+syms x1 x2 x3 u1 u2; % x1=T; x2=z; x3=dz; u1=dTi; u2=Fdz;
 
 x=[x1;x2;x3];
 u=[u1;u2];
 [Te,rho]=tr(x);             %Presa di pressione esterna, pint=pext
-m=m0+rho*Te*V/x3;
+m=m0+rho*Te*V/x1;
 Sz=l*2*r+pi/2*r^2;
 
 %% Definizione sistema non lineare
 
-f(1)=x2;                                                                %z_punto
-f(2)=-Kt*(x3-Te)/c+u1/c;                                                %Ti_punto
-f(3)=(rho*V*g+rho*Te*V*f(2)*x2/x3^2-m*g-0.5*Cz*Sz*rho*x2^2+u2)/m;       %Z_punto_punto
+f(1)=-Kt*(x1-Te)/c+u1/c;                                                %Ti_punto
+f(2)=x3;                                                                %z_punto
+f(3)=(rho*V*g+rho*Te*V*f(1)*x3/x1^2-m*g-0.5*Cz*Sz*rho*x3^2+u2)/m;       %Z_punto_punto
 
 f=f.';
 
@@ -30,14 +30,13 @@ f=f.';
 
 z_bar=500;
 
-x1_eq=z_bar;
-x2_eq=0;
+x2_eq=z_bar;
+x3_eq=0;
 
-eqn= rho*V==m;
-T_bar=solve(eqn,x3);
-x3_eq=double(subs(T_bar,x1,x1_eq));
+eqn=rho*V==m;
+x1_eq=solve(eqn,x1); x1_eq=double(subs(x1_eq,x2,x2_eq));    %x1_eq=p/(R*(rho-m0/V)
 
-u1_eq=Kt*(x3_eq-double(subs(Te,x1,x1_eq)));
+u1_eq=Kt*(x1_eq-double(subs(Te,x2,x2_eq)));
 u2_eq=0;
 
 x_eq=[x1_eq x2_eq x3_eq].';
@@ -78,7 +77,7 @@ p=[-1;-2;-3];
 K=-place(A,B,p);
 
 %Poli d A+LC ... convergenza
-q=[-20,-21,-22];
+q=[-10,-11,-12];
 L=-(place(A.',C.',q)).';
 
 %Regolatore

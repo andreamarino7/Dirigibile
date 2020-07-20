@@ -2,7 +2,7 @@ function [T,rho] = tr(x)
 %% Calcolo Temperatura e Densità ad una data quota z
 global p0 L g R T0
 
-z=x(1);
+z=x(2);
 
 T=T0-L*z;
 p=p0*(1-L/T0*z)^(g/(R*L));
