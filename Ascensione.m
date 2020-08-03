@@ -86,4 +86,7 @@ reg=ss(A+B*K+L*C,-K',-L',0);
 %% Anello chiuso e risposta al gradino
 Gc1=feedback(sys,reg);
 opt=stepDataOptions('StepAmplitude',dcgain(reg));
-step(Gc1,opt)
+step(reg,opt)
+
+% Test con sistema non lin (ogni step), pianificazione ottima (cambio
+% quota), stima RAS, cinematica
