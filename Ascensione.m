@@ -10,8 +10,8 @@ syms x1 x2 x3 u1 u2; % x1=T; x2=z; x3=dz; u1=dTi; u2=Fdz;
 
 x=[x1;x2;x3];
 u=[u1;u2];
-[Te,rho]=tr(x);             %Presa di pressione esterna, pint=pext
-m=m0+rho*Te*V/x1;
+[Te,rho]=tr(x);            
+m=m0+rho*Te*V/x1;        %Presa di pressione esterna, pint=pext
 Sz=l*2*r+pi/2*r^2;
 
 %% Definizione sistema non lineare
@@ -81,7 +81,7 @@ q=[-10,-11,-12];
 L=-(place(A.',C.',q)).';
 
 %Regolatore
-reg=ss(A+B*K+L*C,L,K,0);
+reg=ss(A+B*K+L*C,-K',-L',0);
 
 %% Anello chiuso e risposta al gradino
 Gc1=feedback(sys,reg);

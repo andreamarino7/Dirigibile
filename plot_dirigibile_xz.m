@@ -2,12 +2,12 @@ function plot_dirigibile_xz(x)
 %% Definizione parametri e punti
 global l r
 
-z=x(1);
+z=x(2);
 lc=l-r;
 xg=Baricentro_Dirigibile;
-pg=[0,z]/10;            %Posizione baricentro
-coda=[-xg,z]/10;     %Posizione coda
-testa=[lc-xg,z]/10;  %Posizione cabina di guida
+pg=[0,z];            %Posizione baricentro
+coda=[-xg/10,z];     %Posizione coda
+testa=[(lc-xg)/10,z];  %Posizione cabina di guida
 
 %% Plot del dirigibile nel piano xz
 f=figure;
