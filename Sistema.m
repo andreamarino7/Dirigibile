@@ -1,4 +1,4 @@
-%% Sistema per la pianificazione del moto ascensionale
+%% Script per la formulazione del problema
 Parametri;
 
 global m0 l r V g Cz z_bar Kt c
@@ -10,7 +10,7 @@ syms x1 x2 x3 u1 u2; % x1=T; x2=z; x3=dz; u1=dTi; u2=Fdz;
 
 x=[x1;x2;x3];
 u=[u1;u2];
-[Te,rho]=tr(x);            
+[Te,rho,pr]=tr(x);            
 m=m0+rho*Te*V/x1;        %Presa di pressione esterna, pint=pext
 Sz=l*2*r+pi/2*r^2;
 
@@ -34,8 +34,7 @@ x2_eq=z_bar;
 x3_eq=0;
 
 eqn=rho*V==m;
-x1_eq=solve(eqn,x1); x1_eq=double(subs(x1_eq,x2,x2_eq));    %x1_eq=p/(R*(rho-m0/V)
-
+x1_eq=solve(eqn,x1); x1_eq=double(subs(x1_eq,x2,x2_eq));    %x1_eq=p/(R*(rho-m0/V))
 u1_eq=Kt*(x1_eq-double(subs(Te,x2,x2_eq)));
 u2_eq=0;
 
