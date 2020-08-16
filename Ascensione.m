@@ -57,8 +57,12 @@ disp(B_lin_eq)
 
 A=A_lin_eq;
 B=B_lin_eq(:,1);
-C=[1 0 0];
+C=[0 1 0];
 D=0;
+
+%Definizione taglie nmatrici
+n=size(A,1);
+m=size(B,2);
 
 sys=ss(A,B,C,D);
 
@@ -80,13 +84,27 @@ K=-place(A,B,p);
 q=[-10,-11,-12];
 L=-(place(A.',C.',q)).';
 
-%Regolatore
-reg=ss(A+B*K+L*C,-K',-L',0);
+%Regolatore parallelo
+reg=ss(A+B*K+L*C,-L,-K,0);
 
-%% Anello chiuso e risposta al gradino
+%% Anello chiuso e valutazione risposta al gradino
 Gc1=feedback(sys,reg);
 opt=stepDataOptions('StepAmplitude',dcgain(reg));
-step(reg,opt)
+% step(Gc1,opt)
+
+%% Discretizzazione
+Ts=0.05;
+sysD=c2d(sys,Ts,'zoh');
+Ad=sysD.a;
+Bd=sysD.b;
+
+%Raggiungibilità
+Rd=ctrb(Ad,Bd);
+if rank(Rd)<n
+    warning('Il sistema discretizzato non è raggiungibile')
+else
+    disp('Il sistema discretizzato è raggiungibile')
+end
 
 % Test con sistema non lin (ogni step), pianificazione ottima (cambio
 % quota), stima RAS, cinematica
