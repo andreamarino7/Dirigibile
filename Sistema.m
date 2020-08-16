@@ -106,5 +106,7 @@ else
     disp('Il sistema discretizzato è raggiungibile')
 end
 
+% Migliorare la stima di kt e inserire dei valori buoni per i poli magari
+% con lqr
 % Test con sistema non lin (ogni step), pianificazione ottima (cambio
 % quota), stima RAS, cinematica
