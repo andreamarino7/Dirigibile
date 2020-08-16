@@ -2,44 +2,27 @@
 Sistema
 %% Definizione parametri
 %Numero di steps
-p=5;
+p=10;
 Ttot=p*Ts;
 
 %Stati iniziale e finale
 x_0=[0 0 0].';
 x_f_2=50;
 x_f_3=0;
-[Te,rho,pr]=tr(x_f_2+z_bar);
-x_f_1=pr/(R*(rho-m0/V))-x1_eq;
+x_f_1=solve(eqn,x1); x_f_1=double(subs(x_f_1,x2,x2_eq+x_f_2))-x1_eq;
 x_f=[x_f_1 x_f_2 x_f_3].';
 
 %Mantenimento stato finale
 keep_final=true;
 
 %Matrice di raggiungibilità
-Rp=Bd;
-for i=2:p
-    Rp=[Bd,Ad*Rp];
+for i=1:p-1
+    Rp(:,i)=Ad^i*Bd;
 end
-
 %% Traiettoria ottima
-
-if(~keep_final)%Non mantenere lo stato finale
-    u=pinv(Rp)*(x_f-Ad^p*x_0);
-else %Mantenere lo stato finale
-    up=pinv(Bd)*(x_f-Ad^(p-1)*x_0);
-    %up=pinv(Bd)*(x_f-A*x_f);
-    
-    %Check che è un equilibrio
-    if (norm(A*x_f+B*up)<1e-10)
-        disp('Ok, trovato un controllo di mantenimento')
-    else
-        warning('Il mantenimento non funziona')
-    end
-    u=pinv(Ad*Rp)*(x_f-Ad^(p+1)*x_0-Bd*up);
-    u=[up;u];
-end
-
+up=Kt*(-u1_eq+x_f_1+x1_eq-double(subs(Te,x2,x2_eq+x_f_2)));
+u=pinv(Rp)*(x_f-Ad^p*x_0-Bd*up);
+u=[up;u];
 %% Input per Simulink
 
 timing=Ts*(0:size(u,1)-1).';
