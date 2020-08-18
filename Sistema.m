@@ -1,7 +1,7 @@
 %% Script per la formulazione del problema
 Parametri;
 
-global m0 l r V g Cz z_bar Kt c
+global m0 l r V g Cz z_bar Kt c x1_eq Sz u1_eq
 
 Kt=1;               %W/K
 c=718;              %J/K
@@ -32,10 +32,11 @@ z_bar=500;
 
 x2_eq=z_bar;
 x3_eq=0;
+Te_bar=double(subs(Te,x2,x2_eq));
+rho_bar=double(subs(rho,x2,x2_eq));
 
-eqn=rho*V==m;
-x1_eq=solve(eqn,x1); x1_eq=double(subs(x1_eq,x2,x2_eq));    %x1_eq=p/(R*(rho-m0/V))
-u1_eq=Kt*(x1_eq-double(subs(Te,x2,x2_eq)));
+x1_eq=Te_bar/(1-m0/(rho_bar*V));
+u1_eq=Kt*(x1_eq-Te_bar);
 u2_eq=0;
 
 x_eq=[x1_eq x2_eq x3_eq].';

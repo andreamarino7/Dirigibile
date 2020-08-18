@@ -1,5 +1,5 @@
 function [T,rho,pr] = tr(x)
-%% Calcolo Temperatura e Densità ad una data quota z
+% Calcolo Temperatura e Densità ad una data quota z
 l=length(x);
 global p0 L0 g R T0
 switch l
