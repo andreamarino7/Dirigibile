@@ -20,6 +20,7 @@ Rp=[zeros(size(Bd)) Rp_down(:,1:end-1);Rp_down];
 %% Traiettoria ottima
 % up=pinv(B)*(-A*x_f); %up=-u1_eq+Kt*(x_f_1+x1_eq-double(subs(Te,x2,x2_eq+x_f_2)))
 u=pinv(Rp)*([x_f;x_f]);
+up=u(1);
 % u=[up;u];
 %% Input per Simulink
 timing=Ts*(0:size(u,1)-1).';
