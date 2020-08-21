@@ -45,7 +45,7 @@ end
 
 %% Aumentare il numero di step
 %Valori saturazione
-u_lb=0; %lower bound
+u_lb=-u1_eq; %lower bound
 u_ub=+100; %upper bound
 
 while not(and(min(u)>=u_lb,max(u)<=u_ub))
@@ -53,7 +53,6 @@ while not(and(min(u)>=u_lb,max(u)<=u_ub))
     Rp=[Bd Ad*Rp];    
     u=pinv(Ad*Rp)*(x_f-Ad^(p+1)*x_0-Bd*up);
 end
-
 u=[up;u];
 disp(['Trovato un tempo minimo di ' num2str(p*Ts)]);
 %% Input per Simulink
