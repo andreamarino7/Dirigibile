@@ -45,8 +45,8 @@ end
 
 %% Aumentare il numero di step
 %Valori saturazione
-u_lb=-u1_eq; %lower bound
-u_ub=+100; %upper bound
+u_lb=-u1_eq;    %lower bound
+u_ub=+100;      %upper bound
 
 while not(and(min(u)>=u_lb,max(u)<=u_ub))
     p=p+1;

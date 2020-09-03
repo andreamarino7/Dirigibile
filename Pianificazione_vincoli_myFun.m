@@ -6,7 +6,7 @@ p=1000;
 
 %Banda di saturazione
 u_min=-u1_eq;
-u_max=+1000;
+u_max=+100;
 
 %Raggiungibilità
 Rp=Bd;
@@ -15,7 +15,7 @@ for i=2:p
 end
 
 Aeq=Ad*Rp;
-beq=x_f-Ad^(p+1)*x_0-Bd*up;
+beq=x_f-Ad^p*x_0-Bd*up;
 lb=repmat(u_min,p,1);
 ub=repmat(u_max,p,1);
 
