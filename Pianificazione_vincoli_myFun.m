@@ -1,8 +1,8 @@
 %% Pianificazione ottima con minima variazione degli ingressi utilizzando myFun
-Pianificazione_senza_vincoli;
+Pianificazione_vincoli_ingresso;
 
 %%Numero di step
-p=1000;
+% p=1000;
 
 %Banda di saturazione
 u_min=-u1_eq;
@@ -15,7 +15,7 @@ for i=2:p
 end
 
 Aeq=Ad*Rp;
-beq=x_f-Ad^p*x_0-Bd*up;
+beq=x_f-Bd*up;
 lb=repmat(u_min,p,1);
 ub=repmat(u_max,p,1);
 
@@ -23,7 +23,7 @@ ub=repmat(u_max,p,1);
 f=@(u)(myFun(u));
 
 %Tentativo iniziale di controllo
-u0=zeros(p,1);
+u0=u(2:end,1);
 
 %Parametri di ottimizzazione
 options = optimset('Algorithm','interior-point','MaxFunEval',80000);

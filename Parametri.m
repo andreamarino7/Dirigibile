@@ -1,4 +1,4 @@
-%% Definizione parametri dirigibile Airlander 10
+%% Definizione parametri dirigibile Gefa Flug
 % http://gefaflug.com/six-seat-airship-gd-6/
 clear all; close all; clc;
 
