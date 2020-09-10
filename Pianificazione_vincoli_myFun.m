@@ -1,33 +1,31 @@
 %% Pianificazione ottima con minima variazione degli ingressi utilizzando myFun
 Pianificazione_vincoli_ingresso;
 
-%%Numero di step
-% p=1000;
-
 %Banda di saturazione
 u_min=-u1_eq;
 u_max=+100;
+p=p*2;  
 
 %Raggiungibilità
 Rp=Bd;
 for i=2:p
-    Rp=[Bd, Ad*Rp];
+	Rp=[Bd, Ad*Rp];
 end
-
+u=pinv(Ad*Rp)*(x_f-Bd*up);
 Aeq=Ad*Rp;
 beq=x_f-Bd*up;
 lb=repmat(u_min,p,1);
 ub=repmat(u_max,p,1);
 
-%Funzione handle da minimizzare
-f=@(u)(myFun(u));
-
 %Tentativo iniziale di controllo
-u0=u(2:end,1);
+u0=[up;u(2:end,1)];
+
+%Funzione handle da minimizzare
+fun=@(u)(myFun(u));
 
 %Parametri di ottimizzazione
-options = optimset('Algorithm','interior-point','MaxFunEval',80000);
-u=fmincon(f,u0,[],[],Aeq,beq,lb,ub,[],options);
+options = optimset('Algorithm','interior-point','MaxFunEval',1e6);
+u=fmincon(fun,u0,[],[],Aeq,beq,lb,ub,[],options);
 u=[up;u];
 
 %% Input per Simulink

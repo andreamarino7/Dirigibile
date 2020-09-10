@@ -1,8 +1,8 @@
-%% Pianificazione ottima degli ingressi senza vincoli
+%% Pianificazione senza vincoli
 Sistema;
 %% Definizione parametri
 %Numero di steps
-p=1000;
+p=2000;
 Ttot=p*Ts;
 
 %Stati iniziale e finale

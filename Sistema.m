@@ -81,7 +81,7 @@ p=[-1;-2;-3];
 K=-place(A,B,p);
 
 %Poli d A+LC ... convergenza
-q=[-10,-11,-12];
+q=[-20,-21,-22];
 L=-(place(A.',C.',q)).';
 
 %Regolatore parallelo
