@@ -13,7 +13,6 @@ u=[u1;u2];
 [Te,rho,pr]=tr(x);            
 m=m0+rho*Te*V/x1;        %Presa di pressione esterna, pint=pext
 Sz=l*2*r+pi/2*r^2;
-
 %% Definizione sistema non lineare
 
 f(1)=-Kt*(x1-Te)/c+u1/c;                                                %Ti_punto
@@ -41,6 +40,8 @@ u2_eq=0;
 
 x_eq=[x1_eq x2_eq x3_eq].';
 u_eq=[u1_eq u2_eq].';
+
+Vlim=-double(sqrt(2*subs(m,[x1,x2],[x1_eq,x2_eq])*g/rho_bar/Sz/Cz));
 
 %Linearizzazione sistema
 A_lin=jacobian(f,x);
@@ -81,7 +82,7 @@ p=[-1;-2;-3];
 K=-place(A,B,p);
 
 %Poli d A+LC ... convergenza
-q=[-20,-21,-22];
+q=5*p;
 L=-(place(A.',C.',q)).';
 
 %Regolatore parallelo

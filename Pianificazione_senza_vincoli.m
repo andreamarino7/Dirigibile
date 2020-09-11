@@ -2,7 +2,7 @@
 Sistema;
 %% Definizione parametri
 %Numero di steps
-p=2000;
+p=1000;
 Ttot=p*Ts;
 
 %Stati iniziale e finale

@@ -1,5 +1,5 @@
 %% Animazione dirigibile
-global l r
+close all;
 %% Temperatura
 f=figure;
 f.WindowState='maximized';
@@ -34,21 +34,20 @@ for i=length(y_lin):length(time)
     y_lin(i)=y_lin(end);
 end
 
-xg=Baricentro_Dirigibile;
+xg=l/2;
+t=0:0.01:2.5*pi;
 
-for i=1:length(y_lin)
+for i=1:3:length(y_lin)
+    pause(Ts)
     cla;
     z=y_lin(i)+z_bar;
-    pg=[0,z];               %Posizione baricentro
-    coda=[-xg/10,z];        %Posizione coda
-    testa=[(l-r-xg)/10,z];  %Posizione cabina di guida
+    pg=[0,z];                   %Posizione baricentro
     hold on
     grid on
     title('Piano x - z');
-    axis ([-20 20 z_bar z_bar+x_f_2+5]);
-    plot(testa(1),testa(2),'yo','linewidth',5);
-    plot([coda(1) testa(1)],[coda(2) testa(2)],'-g','linewidth',10);
+    axis ([-20 20 z_bar*0.98 z_bar+x_f_2*1.15]);
+    plot([0 l/4],[z z],'b');
+    plot(l/4*cos(t),r/2*sin(t)+z,'g');
     plot(pg(1),pg(2),'kx','linewidth',1,'markersize',10);
-    pause(Ts)
 end
     

@@ -1,13 +1,13 @@
 %% Limitazioni sullo stato (in particolare sulla variazione di temperatura interna massima)
 %Parametri di appoggio
-Tmax=150;
-Tmin=-150;
-umax=max(u);
-umin=min(u);
-T_max=1.5;
-T_min=-1.5;
+Tmax=150;           %Inserito SOLO per il riferimento iniziale
+Tmin=-150;          % "        "          "          "
+umax=max(u);        %Limite superiore per gli ingressi
+umin=min(u);        %Limite inferiore per gli ingressi
+T_max=1.5;          %Limite superiore per la temperatura
+T_min=-1.5;         %Limite inferiore per la temperatura
 
-while any([Tmax>T_max,Tmin<T_min,umax>u_ub,umin<u_lb])
+while any([Tmax>T_max,Tmin<T_min,umax>u_max,umin<u_min])
     Rp=Bd;
     for i=2:p
         Rp=[Bd,Ad*Rp];

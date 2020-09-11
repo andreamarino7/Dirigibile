@@ -1,40 +1,40 @@
 %% Pianificazione ottima degli ingressi con vincoli sugli ingressi
 Pianificazione_senza_vincoli;
 %% Utilizzo lsqlin
-% % %Numero di step
-% % p=1000;
-% % 
-% % %Inizializzazione della variabile di riuscita di lsqlin
-% % exitflag=0;
-% % 
-% % %Banda di saturazione
-% % u_min=-10;
-% % u_max=+200;
-% % 
-% % %Variabili di appoggio
-% % C_lsq=eye(p);
-% % d_lsq=zeros(p,1);
-% % 
-% % while exitflag~=1
-% %     %Matrice di raggiungibilità
-% %     for i=1:p
-% %     Rp_down(:,i)=Ad^(i-1)*Bd;
-% %     end
-% %     Rp=[zeros(size(Bd)) Rp_down(:,1:end-1);Rp_down];
-% %     
-% %     Aeq=Rp;
-% %     beq=[x_f;x_f];    
-% %     lb=repmat(u_min,p,1);
-% %     ub=repmat(u_max,p,1);
-% %     %Soluzione con lsqlin
-% %     [u,~,~,exitflag]=lsqlin(C_lsq,d_lsq,[],[],Aeq,beq,lb,ub);
-% %     disp(p);
-% %     %Aggiornamento parametri di appoggio
-% %     p=p+100;
-% %     C_lsq=eye(p);
-% %     d_lsq=zeros(p,1);
-% % end
-% % u=[up;u];
+% %Numero di step
+% p=1000;
+% 
+% %Inizializzazione della variabile di riuscita di lsqlin
+% exitflag=0;
+% 
+% %Banda di saturazione
+% u_min=-10;
+% u_max=+200;
+% 
+% %Variabili di appoggio
+% C_lsq=eye(p);
+% d_lsq=zeros(p,1);
+% 
+% while exitflag~=1
+%     %Matrice di raggiungibilità
+%     for i=1:p
+%     Rp_down(:,i)=Ad^(i-1)*Bd;
+%     end
+%     Rp=[zeros(size(Bd)) Rp_down(:,1:end-1);Rp_down];
+%     
+%     Aeq=Rp;
+%     beq=[x_f;x_f];    
+%     lb=repmat(u_min,p,1);
+%     ub=repmat(u_max,p,1);
+%     %Soluzione con lsqlin
+%     [u,~,~,exitflag]=lsqlin(C_lsq,d_lsq,[],[],Aeq,beq,lb,ub);
+%     disp(p);
+%     %Aggiornamento parametri di appoggio
+%     p=p+100;
+%     C_lsq=eye(p);
+%     d_lsq=zeros(p,1);
+% end
+% u=[up;u];
 
 %% Metodo 2 - Incrementando il numero di passi
 %Matrice di raggiungibilità
@@ -45,10 +45,10 @@ end
 
 %% Aumentare il numero di step
 %Valori saturazione
-u_lb=-u_eq(1);     %lower bound
-u_ub=+120;      %upper bound
+u_min=-u_eq(1);      %lower bound
+u_max=+250;          %upper bound
 
-while not(and(min(u)>=u_lb,max(u)<=u_ub))
+while not(and(min(u)>=u_min,max(u)<=u_max))
     p=p+1;
     Rp=[Bd Ad*Rp];    
     u=pinv(Ad*Rp)*(x_f-Bd*up);

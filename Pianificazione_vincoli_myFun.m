@@ -1,11 +1,6 @@
 %% Pianificazione ottima con minima variazione degli ingressi utilizzando myFun
 Pianificazione_vincoli_ingresso;
 
-%Banda di saturazione
-u_min=-u1_eq;
-u_max=+100;
-p=p*2;  
-
 %Raggiungibilità
 Rp=Bd;
 for i=2:p
@@ -24,7 +19,7 @@ u0=[up;u(2:end,1)];
 fun=@(u)(myFun(u));
 
 %Parametri di ottimizzazione
-options = optimset('Algorithm','interior-point','MaxFunEval',1e6);
+options = optimset('Algorithm','interior-point','MaxFunEval',1e3);
 u=fmincon(fun,u0,[],[],Aeq,beq,lb,ub,[],options);
 u=[up;u];
 
