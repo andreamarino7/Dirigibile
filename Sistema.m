@@ -6,7 +6,7 @@ global m0 l r V g Cz z_bar Kt c x1_eq Sz u1_eq
 Kt=1;               %W/K
 c=718;              %J/K
 
-syms x1 x2 x3 u1 u2; % x1=T; x2=z; x3=dz; u1=dTi; u2=Fdz;
+syms x1 x2 x3 u1 u2; % x1=T; x2=z; x3=dz; u1=v; u2=Fdz;
 
 x=[x1;x2;x3];
 u=[u1;u2];
@@ -61,7 +61,7 @@ B=B_lin_eq(:,1);
 C=[0 1 0];
 D=0;
 
-%Definizione taglie nmatrici
+%Definizione taglie matrici
 n=size(A,1);
 m=size(B,2);
 
@@ -78,10 +78,10 @@ disp(['Il rango della matrice di osservabilità è ' num2str(rR)]);
 % Sintesi regolatore in parallelo
 
 % Poli di A+BK ... stabilità
-p=[-1;-2;-3];
+p=[-1.5;-10;-12];
 K=-place(A,B,p);
 
-%Poli d A+LC ... convergenza
+% Poli d A+LC ... convergenza
 q=5*p;
 L=-(place(A.',C.',q)).';
 
@@ -106,8 +106,3 @@ if rank(Rd)<n
 else
     disp('Il sistema discretizzato è raggiungibile')
 end
-
-% Migliorare la stima di kt e inserire dei valori buoni per i poli magari
-% con lqr
-% Test con sistema non lin (ogni step), pianificazione ottima (cambio
-% quota), stima RAS, cinematica

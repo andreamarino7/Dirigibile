@@ -36,15 +36,14 @@ Pianificazione_senza_vincoli;
 % end
 % u=[up;u];
 
-%% Metodo 2 - Incrementando il numero di passi
-%Matrice di raggiungibilità
+%% Incremento del numero di passi
+% Matrice di raggiungibilità
 Rp=Bd;
 for i=2:p
     Rp=[Bd,Ad*Rp];
 end
 
-%% Aumentare il numero di step
-%Valori saturazione
+% Valori saturazione
 u_min=-u_eq(1);      %lower bound
 u_max=+250;          %upper bound
 

@@ -18,7 +18,8 @@ while any([Tmax>T_max,Tmin<T_min,umax>u_max,umin<u_min])
     uSim=[timing,flipud(u)];
     y_lin=lsim(sys,flipud(u),timing,x_0,'zoh');
     ySim=[timing,y_lin];
-    simOut=sim('Simulazione_sistema_nl','SaveOutput','on','OutputSaveName','Tsim');
+    simOut=sim('Simulazione_sistema_nl','SaveOutput','on',...
+        'OutputSaveName','Tsim');
     Tsim = simOut.get('Tsim');
     Tmax=max(Tsim);
     %disp(Tmax);
