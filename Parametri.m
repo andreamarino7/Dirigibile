@@ -2,7 +2,7 @@
 % http://www.personalblimp.com/specs.html
 clear all; close all; clc;
 
-global m0 l r V  T0 L0 p0  g R Cz
+global m0 l r V  T0 L0 p0  g R Cz Kt c
 
 m0=2000;                    %kg                              da data sheet
 l=31.1;                     %m                               da data sheet
@@ -15,5 +15,5 @@ p0=1.013e5;                 %Pa                              da ISA
 g=9.81;                     %m/s^2
 R=287.1;                    %m^2/(s^2*K)
 Cz=0.52;                    %superficie lunga
-
-%x=[10 20 63 52 10 5 8 6];
+Kt=150;                     %W/K
+c=718;                      %J/K

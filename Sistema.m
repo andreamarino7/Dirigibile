@@ -3,16 +3,13 @@ Parametri;
 
 global m0 l r V g Cz z_bar Kt c x1_eq Sz u1_eq
 
-Kt=1;               %W/K
-c=718;              %J/K
-
-syms x1 x2 x3 u1 u2; % x1=T; x2=z; x3=dz; u1=v; u2=Fdz;
+syms x1 x2 x3 u1 u2; % x1=Ti; x2=z; x3=dz; u1=v; u2=Fdz;
 
 x=[x1;x2;x3];
 u=[u1;u2];
 [Te,rho,pr]=tr(x);            
-m=m0+rho*Te*V/x1;        %Presa di pressione esterna, pint=pext
-Sz=l*2*r+pi/2*r^2;
+m=m0+rho*Te*V/x1;
+Sz=l*2*r;
 %% Definizione sistema non lineare
 
 f(1)=-Kt*(x1-Te)/c+u1/c;                                                %Ti_punto

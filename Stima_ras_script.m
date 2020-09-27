@@ -3,9 +3,10 @@ hFig=figure;
 Rmin=0;
 Rmax=10;
 
-A_ras = [A_lin_eq, -B*K;
-         L*C,  A_lin_eq+B*K+L*C];
+%A_ras = [A_lin_eq, -B*K;
+%         L*C,  A_lin_eq+B*K+L*C];
 
+A_ras=Gc1.A;
 max_i=200;
 
 for i=1:max_i

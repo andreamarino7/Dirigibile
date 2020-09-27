@@ -27,3 +27,5 @@ timing=Ts*(0:size(u,1)-1).';
 uSim=[timing,flipud(u)];
 y_lin=lsim(sys,flipud(u),timing,x_0,'zoh');
 ySim=[timing,y_lin];
+u_min=-u_eq(1);      %lower bound
+u_max=600;          %upper bound

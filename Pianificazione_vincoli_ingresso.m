@@ -45,7 +45,7 @@ end
 
 % Valori saturazione
 u_min=-u_eq(1);      %lower bound
-u_max=+250;          %upper bound
+u_max=600;          %upper bound
 
 while not(and(min(u)>=u_min,max(u)<=u_max))
     p=p+1;

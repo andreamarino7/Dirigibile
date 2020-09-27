@@ -2,7 +2,7 @@
 Pianificazione_vincoli_ingresso;
 
 % Aggiunta tempo
-p=p+100;
+p=p+200;
 
 %vRaggiungibilità
 Rp=Bd;
@@ -22,7 +22,7 @@ u0=zeros(size(u));
 fun=@(u)(FunOtt(u));
 
 %Parametri di ottimizzazione
-options = optimset('Algorithm','interior-point','MaxFunEval',1e6);
+options = optimset('Algorithm','interior-point','MaxFunEval',1e7);
 u=fmincon(fun,u0,[],[],Aeq,beq,lb,ub,[],options);
 u=[up;u];
 
